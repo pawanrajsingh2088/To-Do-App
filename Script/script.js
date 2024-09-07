@@ -1,10 +1,8 @@
 const btn = document.getElementById("btn");
 const table = document.getElementById("table");
 
-// Initialize items from localStorage or as an empty array if it's null
 let items = JSON.parse(localStorage.getItem("TODO")) || [];
 
-// Ensure display is working even if there are no items
 display();
 
 btn.addEventListener("click", (e) => {
@@ -23,6 +21,10 @@ btn.addEventListener("click", (e) => {
 });
 
 function display() {
+    if (!Array.isArray(items)) {
+        items = [];
+    }
+
     table.innerHTML = '';
     items.forEach((item, index) => {
         let data = document.createElement("div");
