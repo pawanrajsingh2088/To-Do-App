@@ -1,6 +1,11 @@
 const btn = document.getElementById("btn");
 const table = document.getElementById("table");
-let items = JSON.parse(localStorage.getItem("TODO"));
+
+// Initialize items from localStorage or as an empty array if it's null
+let items = JSON.parse(localStorage.getItem("TODO")) || [];
+
+// Ensure display is working even if there are no items
+display();
 
 btn.addEventListener("click", (e) => {
     const text = document.getElementById("text").value.trim();
@@ -16,8 +21,6 @@ btn.addEventListener("click", (e) => {
         document.getElementById("text").value = "";
     }
 });
-
-display();
 
 function display() {
     table.innerHTML = '';
@@ -41,7 +44,6 @@ function toggleComplete(index) {
 
 function deleteItem(index) {
     items.splice(index, 1);
-
     localStorage.setItem("TODO", JSON.stringify(items));
     display();
 }
